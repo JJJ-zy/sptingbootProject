@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div th:fragment="headerTitle">
+    <header class="main clearfix">
+        <div class="logo"><h1 th:text="${session.company.getCyName()}"></h1></div>
+        <div class="tel">
+            <span><i class="glyphicon glyphicon-earphone"></i>全国服务热线</span>
+            <h2 th:text="${session.company.getCyPhone()}"></h2>
+        </div>
+    </header>
+</div>
+<div class="nav_r" th:fragment="navTitle">
+    <li><a href="/index" th:text="${session.hEditor.get(0).getEditorName()}"></a></li>
+    <li><a href="/company" th:text="${session.hEditor.get(1).getEditorName()}"></a></li>
+    <li><a href="/product" th:text="${session.hEditor.get(2).getEditorName()}"></a></li>
+    <li><a href="/about" th:text="${session.hEditor.get(3).getEditorName()}"></a></li>
+    <li><a href="/news" th:text="${session.hEditor.get(4).getEditorName()}"></a></li>
+    <li><a href="/technology" th:text="${session.hEditor.get(5).getEditorName()}"></a></li>
+    <li><a href="/honor" th:text="${session.hEditor.get(6).getEditorName()}"></a></li>
+    <li><a href="/target" th:text="${session.hEditor.get(7).getEditorName()}"></a></li>
+</div>
+<div class="f_menu"   th:fragment="footerTitle">
+    <dl class="ab">
+        <dt><a href="/product">产品导航</a></dt>
+        <dd><a th:href="'/product?kind='+${session.allKinds.get(0).getProNum()}" th:text="${session.allKinds.get(0).getProKind()}"></a></dd>
+        <dd><a th:href="'/product?kind='+${session.allKinds.get(1).getProNum()}" th:text="${session.allKinds.get(1).getProKind()}"></a></dd>
+        <dd><a th:href="'/product?kind='+${session.allKinds.get(2).getProNum()}" th:text="${session.allKinds.get(2).getProKind()}"></a></dd>
+        <dd><a th:href="'/product?kind='+${session.allKinds.get(3).getProNum()}" th:text="${session.allKinds.get(3).getProKind()}"></a></dd>
+        <dd><a th:href="'/product?kind='+${session.allKinds.get(4).getProNum()}" th:text="${session.allKinds.get(4).getProKind()}"></a></dd>
+        <dd><a th:href="'/product?kind='+${session.allKinds.get(5).getProNum()}" th:text="${session.allKinds.get(5).getProKind()}"></a></dd>
+    </dl>
+    <dl>
+        <dt><a href="/company">关于我们</a></dt>
+        <dd><a href="/company" th:text="${session.fEditor2.get(0).getEditorName()}"></a></dd>
+        <dd><a href="/news" th:text="${session.fEditor2.get(1).getEditorName()}"></a></dd>
+        <dd><a href="/technology" th:text="${session.fEditor2.get(2).getEditorName()}"></a></dd>
+        <dd><a href="/honor" th:text="${session.fEditor2.get(3).getEditorName()}"></a></dd>
+    </dl>
+    <dl>
+        <dt><a href="/target">联系我们</a></dt>
+        <dd><a href="/target" th:text="${session.fEditor3.get(0).getEditorName()}"></a></dd>
+    </dl>
+</div>
+<address th:fragment="footerAddress">
+        <span>
+            <b th:text="${session.company.getCyName()}"></b>
+            <font>地址：</font>[[${session.company.getCyAddress}]]<br>
+            <font>电话：</font>[[${session.company.getCyPhone}]]<br>
+            <font>网址：</font>[[${session.company.getCyWeb}]]<br>
+        </span>
+</address>
+</body>
+</html>

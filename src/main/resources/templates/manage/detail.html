@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>商品细节页面</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" th:href="@{/css/manage/public.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery3.5.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<p class="text-center" style="background-color: #166bff;color: white;font-size: 20px;height: 50px;line-height: 50px">详情</p>
+<div class="main detail">
+    <form>
+        <div class="form-group row">
+            <div class="text-center text-title"><label style="line-height: 30px">录入编号:</label></div>
+            <div class="text-input"><label style="line-height: 30px">[[${session.pro.proId}]]</label></div>
+        </div>
+        <div class="form-group row">
+            <div class="text-center text-title"><label style="line-height: 30px">商品名称:</label></div>
+            <div class="text-input"><label style="line-height: 30px">[[${session.pro.proName}]]</label></div>
+        </div>
+        <div class="form-group row">
+            <div class="text-center text-title"><label style="line-height: 30px">商品种类:</label></div>
+            <div class="text-input"><label style="line-height: 30px">[[${session.pro.proKind}]]</label></div>
+        </div>
+        <div class="form-group row">
+            <div class="text-center text-title"><label style="line-height: 30px">商品介绍:</label></div>
+            <div class="text-input"><label style="line-height: 30px" th:utext="${session.pro.proDetail.replaceAll('\n','<br>')}"></label></div>
+        </div>
+        <div class="form-group">
+            <img th:src="'images/'+${session.pro.proImg}" th:style="${session.pro.proImg == null?'block:none':''}" width="80%" height="400px" />
+        </div>
+        <div class="form-group">
+            <button id="delete" type="button" class="btn btn-primary">删除</button>
+            <button id="return" type="button" class="btn btn-primary">返回</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function (){
+        $("#return").click(function (){
+            history.back(-1)
+        })
+
+        $("#delete").click(function (){
+            if (confirm("确定要删除吗?")){
+                $.post({
+                    url:"optionGood",
+                    data:"proId="+[[${session.pro.proId}]]+"&_method=DELETE",
+                    success:function (data){
+                        if (data == true){
+                            alert("删除成功")
+                            history.back(-1)
+                        }else{
+                            alert("删除失败")
+                        }
+                    }
+                })
+            }
+
+        })
+    })
+</script>
+</body>
+</html>

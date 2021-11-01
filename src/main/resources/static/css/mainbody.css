@@ -1,0 +1,169 @@
+/**左部ui**/
+.main .left-ui {
+    width: 200px;
+    float: left;
+}
+
+.main .left-ui .mainbody-title {
+    background-color: #2b669a;
+    font-size: 20px;
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.main .left-ui .mainbody-left {
+    background-color: #e5e5e5;
+    text-align: center;
+}
+
+.main .left-ui .mainbody-left h3 {
+    width: 80%;
+    font-size: 18px;
+    background-color: #d5d5d5;
+    border-radius: 30px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    margin: 8px auto;
+    cursor: pointer;
+}
+
+.main .left-ui .mainbody-title .context {
+    color: white;
+}
+.main .left-ui .mainbody-title i{
+    color: white;
+    font-size: 15px;
+}
+
+/**右部ui**/
+.main .right-ui {
+    width: 980px;
+    margin-left: 220px;
+}
+
+.main .right-ui .right-title .right-title-left {
+    float: left;
+    font-size: 18px;
+    color: #2aabd2;
+}
+
+.main .right-ui .right-title .right-title-left span {
+    font-size: 13px;
+    color: #2aabd2;
+}
+
+.main .right-ui .right-title .right-title-img {
+    width: 800px;
+    margin: 0 auto;
+    padding-top: 8px;
+}
+
+.main .right-ui .right-title .right-title-img img {
+    width: 800px;
+    float: left;
+}
+
+.main .right-ui .right-title .right-title-right {
+    width: 50px;
+    float: right;
+}
+
+.main .right-mainbody {
+    margin-top: 50px;
+}
+
+.main .right-mainbody .right-mainbody-ul > li {
+    width: 24%;
+    height: 250px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    float: left;
+}
+
+.main .right-mainbody .right-mainbody-ul > li > a:hover img {
+    border: 2px solid #2b669a;
+}
+
+.main .right-mainbody .right-mainbody-ul > li img {
+    width: 99%;
+    height: 88%;
+    border: 1px solid #f8f8f8;
+}
+
+.main .right-mainbody .right-mainbody-ul > li button {
+    margin-left: 22px;
+}
+
+.main .right-ui .part {
+    width: 1000px;
+    float: left;
+    margin-top: 20px;
+}
+
+.main .right-ui .part .part-ui {
+    width: 100%;
+    text-align: center;
+}
+
+.main .right-ui .part .part-ui a {
+    display: inline-block;
+    margin: 0 2px;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    overflow: hidden;
+    text-align: center;
+    line-height: 26px;
+    border: 1px solid #e1e1e1;
+    position: relative;
+    font-family: Arial;
+}
+.main .right-ui .part .part-ui a:hover {
+    background: #fafafa;
+    border: 1px solid #e1e1e1;
+    color: #555
+}
+.main .right-ui .part .part-ui a.Current,
+.main .right-ui .part .part-ui a.on {
+    background: #1B72C7;
+    border: 1px solid #1B72C7;
+    color: #fff
+}
+
+.ban{
+    pointer-events:none
+}
+
+
+footer{background: #2a2a2a; padding-top: 50px;float: left;width: 100%;margin-top: 10px}
+footer .ly{text-align: right; margin: -52px 0 50px 0;}
+footer .ly img{width: 50%;}
+footer address{float: left; width: 400px; line-height: 30px; color: #fff; font-style: normal;}
+footer address img{float: left; margin-right: 20px;}
+footer address span{float: left;}
+footer address span font{color: #fff;}
+footer address span b{display: block; padding:5px 0 7px 0; font-size: 1.33em; line-height: 1;}
+
+footer .f_menu{float: left; overflow: hidden; border-left: 2px solid #313131; border-right: 2px solid #313131; padding: 0 0 0 40px;}
+footer .f_menu dl{float: left; padding-right: 60px;}
+footer .f_menu dl dt{font-size: 1.16em; line-height: 1;}
+footer .f_menu dl dt a,
+footer .f_menu dl dt a:visited,
+footer .f_menu dl dt a:hover{color: #fff;}
+footer .f_menu dl dt:after{display: block; content: ""; margin: 18px 0 10px 0; width: 30px; height: 2px; background: #bd0000;}
+footer .f_menu dl.ab{overflow: hidden; width: 310px; padding-right: 30px;}
+footer .f_menu dl.ab dd{float: left; width: 50%;}
+footer .f_menu dl dd{line-height: 28px}
+footer .f_menu dl dd a,
+footer .f_menu dl dd a:visited{color: #8a8a8a;}
+footer .f_menu dl dd a:hover{color: #fff;}
+
+footer .ewm{float: right; text-align: center; color: #8a8a8a;}
+footer .ewm img{width: 140px; margin-bottom: 5px;}
+
+footer .link{margin-top: 25px; border-top: 1px solid #2f2f2f; padding: 17px 0; line-height: 25px; color: #555;}
+footer .link ul{float: left; /*width: 60%;*/}
+/*footer .link ul li{float: left;}
+footer .link ul li a{color: #555; margin-right: 8px;}*/
+footer .link span{float: right;}

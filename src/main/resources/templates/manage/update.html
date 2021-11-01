@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title>修改商品</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+    <link rel="stylesheet" th:href="@{/css/index.css}" />
+    <link rel="stylesheet" th:href="@{/css/manage/public.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery3.5.1.js}"></script>
+    <script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<p class="text-center" style="background-color: #166bff;color: white;font-size: 20px;height: 50px;line-height: 50px">修改</p>
+<div class="main detail">
+    <form id="updateForm" class="form-inline" enctype="multipart/form-data">
+        <div class="form-group row hidden">
+            <div class="text-center text-title"><label style="line-height: 30px">录入编号:</label></div>
+            <div class="text-input"><input type="text" class="form-control" name="proId" th:value="${session.pro.getProId()}" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="text-center text-title"><label style="line-height: 30px">录入编号:</label></div>
+            <div class="text-input"><label style="line-height: 30px">[[${session.pro.proId}]]</label></div>
+        </div>
+        <div class="form-group row">
+            <div class="text-center text-title"><label style="line-height: 30px">商品名称:</label></div>
+            <div class="text-input"><input type="text" class="form-control" name="proName" th:value="${session.pro.getProName()}" /></div>
+        </div>
+        <div class="form-group row">
+            <div class="text-center text-title"><label style="line-height: 30px">商品种类:</label></div>
+            <div class="text-input">
+                <select name="proKind" >
+                    <option>--请选择--</option>
+                    <option th:each="kind,status:${session.manageKinds}" th:value="${kind.getProNum()}" th:text="${kind.getProKind()}" th:attr="selected=${session.pro.getProKind().equals(kind.getProNum())?'true':'false'}"></option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="text-center text-title"><label style="line-height: 30px">商品介绍:</label></div>
+            <div class="text-input"><textarea name="proDetail" rows="10" cols="50" th:text="${session.pro.getProDetail()}" style="padding: 5px"></textarea></div>
+        </div>
+        <div class="form-group row">
+            <div class="text-center text-title"><label style="line-height: 30px">商品图片:</label></div>
+            <div class="text-input"><input type="file" accept="image/*" name="image"/></div>
+        </div>
+        <div>
+            <button id="update" type="button" class="btn btn-primary">修改</button>
+            <button id="return" type="button" class="btn btn-primary">返回</button>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function (){
+        $("#return").click(function (){
+            history.back(-1)
+        })
+
+        $("#update").click(function (){
+            if (confirm("确定要修改吗?")){
+                const data = new FormData(document.getElementById("updateForm"))
+                $.post({
+                    url:"optionGood?_method=PUT",
+                    data:data,
+                    processData:false,
+                    cache:false,
+                    contentType:false,
+                    success:function (data){
+                        if (data == true){
+                            alert("修改成功")
+                            history.back(-1)
+                        }else{
+                            alert("修改失败")
+                        }
+                    }
+                })
+            }
+
+        })
+    })
+</script>
+</body>
+</html>

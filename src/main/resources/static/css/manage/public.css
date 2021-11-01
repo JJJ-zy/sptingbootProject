@@ -1,0 +1,100 @@
+.p-title {
+    background-color: #166bff;
+    color: white;
+    font-size: 20px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    margin-bottom: 150px;
+}
+.login button{
+    width: 100px;
+    margin-left: 50px;
+}
+.login button a{
+    text-decoration: none;
+}
+.login form>div{
+    width: 1200px;
+    margin: 20px 450px;
+}
+.login form>div>.text-title{
+    float: left;
+    width: 100px;
+}
+.login form>div>.text-input{
+    float: left;
+    width: 300px;
+}
+.mainbody-left a{
+    color: black;
+}
+.mainbody-left a:hover{
+    color: black;
+}
+
+.dec{
+    width: 1000px;
+    border: 1px solid black;
+}
+
+.index-right form>div{
+    width: 1200px;
+    margin: 20px 400px;
+}
+.index-right form>div>.text-title{
+    float: left;
+    width: 100px;
+}
+.index-right form>div>.text-input{
+    float: left;
+    width: 300px;
+}
+.index-right button{
+    width: 100px;
+    margin-left: 50px;
+}
+.h2-title{
+    font-size: 25px;
+    margin-left: 30px;
+}
+.table{
+    margin-top: 15px
+}
+.table a{
+    text-decoration: none;
+}
+.table a button{
+    color: black;
+}
+
+.detail form>div{
+    width: 1200px;
+    margin: 20px 200px;
+}
+.detail form>div>.text-title{
+    float: left;
+    width: 100px;
+}
+.detail form>div>.text-input{
+    float: left;
+    width: 500px;
+}
+.detail button{
+    width: 100px;
+    margin-left: 50px;
+}
+.mForm{
+    margin-top: 10px;
+    margin-left: 30px;
+}
+.mForm label{
+    width: 100px;
+    margin-top: 10px;
+}
+.mForm textarea{
+    margin-top: 10px;
+}
+.mForm input{
+    width: 300px;
+}

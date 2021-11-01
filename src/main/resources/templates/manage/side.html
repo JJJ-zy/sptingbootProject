@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理页面</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mainbody.css}"/>
+    <link rel="stylesheet" th:href="@{/css/manage/public.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery3.5.1.js}"></script>
+</head>
+<body>
+<p class="p-title" style="margin-bottom: 0px">后台管理页面</p>
+<div class="main">
+    <div class="left-ui">
+        <div class="mainbody-title">
+            <a href="">
+                <span>信息修改</span><br>
+                <i>UPDATE</i>
+            </a>
+        </div>
+        <div class="mainbody-left">
+            <h3><a href="/manage/index.html">
+                商品信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mNav">
+                导航栏信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mSide">
+                侧栏导航信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mCompany">
+                公司信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mBanner">
+                轮播图信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mScore">
+                业绩信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mNews">
+                新闻和技术支持
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mHonor">
+                荣誉资质
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+
+        </div>
+        <div class="mainbody-title">
+            <span class="context">24小时咨询热线</span>
+            <span class="context" th:text="${session.company.getCyPhone()}"></span>
+        </div>
+    </div>
+    <div class="right-ui">
+        <div class="right-mainbody">
+            <div class="dec row main index-right">
+                <h2 class="h2-title">边栏导航修改</h2>
+                <form class="mForm">
+                    <label>添加分类:</label><input id="proKind" type="text" name="proKind"><button class="btn btn-success" onclick="addKind()">添加</button>
+                </form>
+                <form th:each="k,status:${session.mKind}" action="/updateSide" class="mForm">
+                    <input type="text" name="id" th:value="${k.getId()}" hidden="hidden">
+                    <label id="label" th:text="${k.getProKind()}"></label><input type="text" name="proKind" style="margin-left: 10px">
+                    <button type="submit" class="btn btn-success">更改</button><button id="delete" type="button" class="btn btn-danger" th:onclick="'deleteKind('+${k.getId()}+')'">删除</button>
+                    <input type="text" name="proNum" th:value="${k.getProNum()}" hidden="hidden">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function deleteKind (id) {
+        if (confirm("确定要删除吗?")) {
+            $.post({
+                url: "optionKind",
+                data: "kindId=" + id + "&_method=DELETE",
+                success: function (data) {
+                    if (data == true) {
+                        alert("删除成功")
+                        location.href = '/mSide'
+                    } else {
+                        alert("删除失败")
+                    }
+                }
+            })
+        }
+    }
+
+    function addKind(){
+        const proKind = $("#proKind").val();
+        $.get({
+            url: "optionKind",
+            data: "proKind=" + proKind,
+            success: function (data) {
+                if (data == 1) {
+                    alert("添加成功")
+                    location.href = '/mSide'
+                } else {
+                    alert("添加失败")
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

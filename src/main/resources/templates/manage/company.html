@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理页面</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mainbody.css}"/>
+    <link rel="stylesheet" th:href="@{/css/manage/public.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery3.5.1.js}"></script>
+</head>
+<body>
+<p class="p-title" style="margin-bottom: 0px">后台管理页面</p>
+<div class="main">
+    <div class="left-ui">
+        <div class="mainbody-title">
+            <a href="">
+                <span>信息修改</span><br>
+                <i>UPDATE</i>
+            </a>
+        </div>
+        <div class="mainbody-left">
+            <h3><a href="/manage/index.html">
+                商品信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mNav">
+                导航栏信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mSide">
+                侧栏导航信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mCompany">
+                公司信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mBanner">
+                轮播图信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mScore">
+                业绩信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mNews">
+                新闻和技术支持
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mHonor">
+                荣誉资质
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+
+        </div>
+        <div class="mainbody-title">
+            <span class="context">24小时咨询热线</span>
+            <span class="context" th:text="${session.company.getCyPhone()}"></span>
+        </div>
+    </div>
+    <div class="right-ui">
+        <div class="right-mainbody">
+            <div class="dec row main index-right">
+                <h2 class="h2-title">公司信息修改</h2>
+                <form class="mForm" action="/updateCompany">
+                    <input type="text" name="id" th:value="${session.mCompany.getId()}" hidden="hidden">
+                    <label>公司名称:</label><input type="text" th:value="${session.mCompany.getCyName()}" name="cyName"><br>
+                    <label>手机号:</label><input type="text" th:value="${session.mCompany.getCyPhone()}" name="cyPhone"><br>
+                    <label>经理:</label><input type="text" th:value="${session.mCompany.getCyManager()}" name="cyManager"><br>
+                    <label>微信:</label><input type="text" th:value="${session.mCompany.getCyVx()}" name="cyVx"><br>
+                    <label>QQ:</label><input type="text" th:value="${session.mCompany.getCyOicq()}" name="cyOicq"><br>
+                    <label>地址:</label><input type="text" th:value="${session.mCompany.getCyAddress()}" name="cyAddress"><br>
+                    <label>网址:</label><input type="text" th:value="${session.mCompany.getCyWeb()}" name="cyWeb"><br>
+                    <label>介绍:</label>
+                    <textarea name="cyIntro" th:utext="${session.mCompany.getCyIntro()}" cols="50" rows="10"></textarea><br>
+                    <button type="submit" class="btn btn-success">修改</button>
+                    <label style="color: greenyellow" th:text="${session.isError}"></label>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理页面</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mainbody.css}"/>
+    <link rel="stylesheet" th:href="@{/css/manage/public.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery3.5.1.js}"></script>
+</head>
+<body>
+<p class="p-title" style="margin-bottom: 0px">后台管理页面</p>
+<div class="main">
+    <div class="left-ui">
+        <div class="mainbody-title">
+            <a href="">
+                <span>信息修改</span><br>
+                <i>UPDATE</i>
+            </a>
+        </div>
+        <div class="mainbody-left">
+            <h3><a href="/manage/index.html">
+                商品信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mNav">
+                导航栏信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mSide">
+                侧栏导航信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mCompany">
+                公司信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mBanner">
+                轮播图信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mScore">
+                业绩信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mNews">
+                新闻和技术支持
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mHonor">
+                荣誉资质
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+
+        </div>
+        <div class="mainbody-title">
+            <span class="context">24小时咨询热线</span>
+            <span class="context" th:text="${session.company.getCyPhone()}"></span>
+        </div>
+    </div>
+    <div class="right-ui">
+        <div class="right-mainbody">
+            <div class="dec row main index-right">
+                <h2 class="h2-title">新闻</h2>
+                <div class="about">
+                    <div th:each="item,status:${session.newsList}">
+                        <a th:text="${item.getNewsTitle()}" style="font-size: 15px;color: #0f0f0f"></a>
+                        <hr>
+                        <span th:text="${item.getNewsDate()}" style="color: #a5a5a5"></span><br><br>
+                        <p th:text="${item.getNewsContext().substring(0,300)}+'......'" style="color: #a5a5a5"></p>
+                        <button type="button" class="btn btn-danger" style="margin-left: 800px" th:onclick="'deleteNews('+${item.getId()}+')'">删除</button><hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-mainbody">
+            <div class="dec row main index-right">
+                <h2 class="h2-title">技术</h2>
+                <div class="about">
+                    <div th:each="tec,status:${session.technologyList}">
+                        <a style="font-size: 15px;color: #0f0f0f" th:text="${tec.getTecTitle()}"></a>
+                        <hr>
+                        <span style="color: #a5a5a5" th:text="${tec.getTecDate()}"></span><br><br>
+                        <p style="color: #a5a5a5" th:text="${tec.getTecContext().length()>310?tec.getTecContext().substring(0,300):tec.getTecContext()}+'......'"></p>
+                        <button type="button" class="btn btn-danger" style="margin-left: 800px" th:onclick="'deleteTec('+${tec.getId()}+')'">删除</button><hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="right-mainbody">
+            <div class="dec row main index-right">
+                <h2 class="h2-title">添加信息</h2>
+                <form id="addForm" class="form-inline" action="/addArticle" style="margin-left: -200px" method="post">
+                    <div class="form-group row">
+                        <div class="text-center text-title"><label style="line-height: 30px">标题:</label></div>
+                        <div class="text-input"><input type="text" class="form-control" name="title" placeholder="输入标题" /></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center text-title"><label style="line-height: 30px">类别:</label></div>
+                        <div class="text-input">
+                            <select name="conKind">
+                                <option>--请选择--</option>
+                                <option value="1">新闻</option>
+                                <option value="2">技术</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center text-title"><label style="line-height: 30px">内容:</label></div>
+                        <div class="text-input"><textarea name="context" rows="10" cols="50" placeholder="输入文章内容" style="padding: 5px"></textarea></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center text-title"><label style="line-height: 30px">作者:</label></div>
+                        <div class="text-input"><input type="text" class="form-control" name="author" placeholder="输入作者" /></div>
+                    </div>
+                   <div>
+                        <button type="submit" class="btn btn-primary">保存</button>
+                       <label th:text="${session.result}"></label>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function deleteNews(id){
+        if (confirm("确定要删除吗?")){
+            $.post({
+                url:"/optionArticle",
+                data:"id="+id+"&kind=1&_method=DELETE",
+                success:function (data){
+                    if (data == true){
+                        alert("删除成功")
+                        location.href='/mNews'
+                    }else{
+                        alert("删除失败")
+                    }
+                }
+            })
+        }
+    }
+
+    function deleteTec(id){
+        if (confirm("确定要删除吗?")){
+            $.post({
+                url:"/optionArticle",
+                data:"id="+id+"&kind=2&_method=DELETE",
+                success:function (data){
+                    if (data == true){
+                        alert("删除成功")
+                        location.href='/mNews'
+                    }else{
+                        alert("删除失败")
+                    }
+                }
+            })
+        }
+    }
+</script>
+</body>
+</html>

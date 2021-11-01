@@ -1,0 +1,38 @@
+.fr{
+    float: left;
+    width: 880px;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.breadCrumb{
+    border: 1px solid #d5d5d5;
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+}
+.breadCrumb p{
+    font-size: 20px;
+    float: left;
+    font-family: 楷体;
+    font-weight: bold;
+    color: #2aabd2;
+}
+.breadCrumb span{
+    float: right;
+}
+.n_con_bk1{
+    border: 1px solid #d5d5d5;
+    margin-top: 10px;
+}
+.n_con_bk1 p {
+    font-size: 15px;
+    padding: 10px;
+}
+.about{
+    border: 1px solid black;
+    padding: 10px;
+}
+.about p{
+    font-size: 15px;
+}

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>首页</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <script src="js/jquery3.5.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/index.css"/>
+    <link rel="stylesheet" href="css/mainbody.css"/>
+</head>
+<body>
+<div th:replace="header :: headerTitle"></div>
+<nav class="index-nav la">
+    <ul class="main" style="position: static">
+        <div th:replace="header :: navTitle"></div>
+    </ul>
+</nav>
+<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+    <!-- 轮播点 -->
+    <ol class="carousel-indicators">
+        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+    </ol>
+
+    <!-- 轮播图 -->
+    <div class="carousel-inner" role="listbox">
+        <div th:each="image,status:${session.images}" th:style="${image.getImgKind()==1?'':'display:none'}" th:class="${status.index==0?'active':''}+' '+${image.getImgKind()==1?'item':''}">
+            <img th:src="'images/banner/'+${image.getImgKind()==1?image.getImgName():''}" alt="banner1">
+        </div>
+    </div>
+
+    <!-- 前后调 -->
+    <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>
+<div class="search_box">
+    <div class="main">
+        <div class="hot_pro">
+            <b>产品直通车:</b>
+            <a th:each="kind,status:${session.allKinds}" th:href="'product?kind='+${kind.getProNum()}">
+                [[${kind.getProKind}]]
+            </a>
+<!--            <a href="#">电力电缆</a>-->
+<!--            <a href="#">控制电缆</a>-->
+<!--            <a href="#">计算机电缆</a>-->
+<!--            <a href="#">矿用电缆</a>-->
+<!--            <a href="#">硅橡胶电缆</a>-->
+<!--            <a href="#">变频电缆</a>-->
+<!--            <a href="#">BV电线</a>-->
+        </div>
+        <form>
+            <div class="search">
+                <input type="text" name="proName" class="search_text" placeholder="请输入搜索关键词"/>
+                <button type="submit" class="search_submit" style="background-color: #403fdb;width: 25px">
+                    <i class="glyphicon glyphicon-search" style="color: white"></i>
+                </button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<!--主体部分-->
+<div class="main">
+    <!--left-->
+    <div class="left-ui">
+        <div class="mainbody-title">
+            <a href="/index">
+                <span>阳谷电缆产品中心</span><br>
+                <i>PRODUCT CENTER</i>
+            </a>
+        </div>
+        <div class="mainbody-left">
+            <h3 th:each="kind,status:${session.allKinds}"><a th:href="'product?kind='+${kind.getProNum()}">
+                [[${kind.getProKind}]]
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+        </div>
+        <div class="mainbody-title">
+            <span class="context">24小时咨询热线</span>
+            <span class="context" th:text="${session.company.getCyPhone()}"></span>
+        </div>
+    </div>
+
+    <!--right-->
+    <div class="right-ui">
+        <div class="right-title">
+            <div class="right-title-left">推荐产品<br><span>PRODUCTS</span></div>
+            <div class="right-title-img"><img src="images/title-bg.png"></div>
+            <div class="right-title-right"><a href="/product">更多<i></i></a></div>
+        </div>
+        <div class="right-mainbody">
+            <ul class="right-mainbody-ul">
+                <li th:each="pro,status:${session.products}">
+                    <a th:href="'details?proId='+${pro.getProId()}">
+                        <span><img th:src="'images/'+${pro.getProImg()}"></span>
+                        <!--		<h2>YJV</h2>-->
+                    </a>
+                    <button class="btn btn-danger"><a th:href="'details?proId='+${pro.getProId()}">了解详情</a></button>
+                    <button class="btn btn-primary"><a href="/target">需求定制</a></button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="main clearfix">
+        <div th:replace="header :: footerAddress"></div>
+        <div th:replace="header :: footerTitle"></div>
+        <div class="ewm" th:each="image,status:${session.images}" th:style="${image.getImgKind()==4?'':'display:none'}">
+            <img th:src="'images/ewm/'+${image.getImgKind()==4?image.getImgName():''}"><br>扫一扫访问
+        </div>
+    </div>
+    <div class="link">
+        <div class="main clearfix">
+            <ul>Copyright © 2020 [[${session.company.getCyName}]] All Rights Reserved 版权所有</ul>
+            <span><a href="http://beian.miit.gov.cn/" target="_blank"/><font color="#FFF"/>鲁ICP备20000482号-1 </font></a> </span>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

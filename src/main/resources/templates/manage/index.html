@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理页面</title>
+    <link rel="stylesheet" th:href="@{/css/index.css}"/>
+    <link rel="stylesheet" th:href="@{/css/mainbody.css}"/>
+    <link rel="stylesheet" th:href="@{/css/manage/public.css}"/>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/js/jquery3.5.1.js}"></script>
+    <script type="text/javascript">
+        $(function () {
+            //ajax请求商品信息
+            $.get({
+                url:'/optionPro',
+                success:function (data){
+                    console.log(data)
+                    let obj = JSON.parse(data)
+                    for (let i = 0; i<obj.length;i++){
+                        const tds = $("<td></td>").append("<a href='/toDetail?proId="+obj[i].proId+"'><button class='btn btn-danger'>详情</button></a><br><a href='/toUpdate?proId="+obj[i].proId+"'><button class='btn btn-success'>修改</button></a>")
+                        const trs = $("<tr></tr>").append("<td id='"+obj[i].proId+"'>"+obj[i].proName+"<br>种类:"+obj[i].proKind+"</td>").append(tds)
+                        $(".table").append(trs)
+                    }
+                },
+                // dataType:JSON
+            })
+        })
+        function addGoodData(){
+            const data = new FormData(document.getElementById("addForm"))
+            console.log(data)
+            //post添加商品
+            $.post({
+                url:'/optionGood',
+                data:data,
+                processData:false,
+                cache:false,
+                contentType:false,
+                success:function (data){
+                    if (data == true){
+                        alert("添加成功");
+                        location.reload()
+                    }
+                }
+            })
+        }
+    </script>
+</head>
+<body>
+<p class="p-title" style="margin-bottom: 0px">后台管理页面</p>
+<div class="main">
+    <div class="left-ui">
+        <div class="mainbody-title">
+            <a href="">
+                <span>信息修改</span><br>
+                <i>UPDATE</i>
+            </a>
+        </div>
+        <div class="mainbody-left">
+            <h3><a>
+                商品信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mNav">
+                导航栏信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mSide">
+                侧栏导航信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mCompany">
+                公司信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mBanner">
+                轮播图信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mScore">
+                业绩信息
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mNews">
+                新闻和技术支持
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+            <h3><a href="/mHonor">
+                荣誉资质
+                <i class="glyphicon glyphicon-chevron-right"></i>
+            </a></h3>
+
+        </div>
+        <div class="mainbody-title">
+            <span class="context">24小时咨询热线</span>
+            <span class="context" th:text="${session.company.getCyPhone()}"></span>
+        </div>
+    </div>
+    <div class="right-ui">
+        <div class="right-mainbody">
+            <div class="dec row main index-right">
+                <h2 class="h2-title">商品信息</h2>
+                <form id="addForm" class="form-inline" action="aaa" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <div class="text-center text-title"><label style="line-height: 30px">录入编号:</label></div>
+                        <div class="text-input"><input type="text" class="form-control" name="proId" placeholder="输入商品编号" /></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center text-title"><label style="line-height: 30px">商品名称:</label></div>
+                        <div class="text-input"><input type="text" class="form-control" name="proName" placeholder="输入商品名称" /></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center text-title"><label style="line-height: 30px">商品种类:</label></div>
+                        <div class="text-input">
+                            <select name="proKind">
+                                <option>--请选择--</option>
+                                <option th:each="kind,status:${session.manageKinds}" th:value="${kind.getProNum()}" th:text="${kind.getProKind()}"></option>
+                            </select>
+<!--                            <input type="text" class="form-control" name="proKind" placeholder="输入商品种类" />-->
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center text-title"><label style="line-height: 30px">商品介绍:</label></div>
+                        <div class="text-input"><textarea name="proDetail" rows="10" cols="50" placeholder="输入商品介绍" style="padding: 5px"></textarea></div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="text-center text-title"><label style="line-height: 30px">商品图片:</label></div>
+                        <div class="text-input"><input type="file" accept="image/*" name="image"/></div>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary" onclick="addGoodData()">保存</button>
+                    </div>
+                </form>
+                <table class="table table-hover">
+                    <tr>
+                        <th>商品</th>
+                        <th>状态</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

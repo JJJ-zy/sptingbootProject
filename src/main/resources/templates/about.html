@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <title>业绩展示</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <script src="js/jquery3.5.1.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/index.css"/>
+    <link rel="stylesheet" href="css/mainbody.css"/>
+    <link rel="stylesheet" href="css/public.css"/>
+</head>
+<body>
+<div th:replace="header.html :: header"></div>
+<nav class="index-nav la">
+    <ul class="main" style="position: static">
+        <div th:replace="header :: navTitle"></div>
+    </ul>
+</nav>
+<div class="main" style="margin-top: 10px">
+    <!--left-->
+    <div class="left-ui">
+        <div class="mainbody-title">
+            <a href="index.html">
+                <span>阳谷电缆产品中心</span><br>
+                <i>PRODUCT CENTER</i>
+            </a>
+        </div>
+        <div class="mainbody-left">
+            <div class="mainbody-left">
+                <h3 th:each="kind,status:${session.allKinds}"><a th:href="'product?kind='+${kind.getProNum()}">
+                    [[${kind.getProKind}]]
+                    <i class="glyphicon glyphicon-chevron-right"></i>
+                </a></h3>
+            </div>
+        </div>
+        <div class="mainbody-title">
+            <span class="context">24小时咨询热线</span>
+            <span class="context" th:text="${session.company.getCyPhone()}"></span>
+        </div>
+    </div>
+
+    <!--right-->
+    <div class="right-ui">
+        <div class="breadCrumb">
+            <p>业绩展示</p>
+            <span>您的当前位置：<a href="/index">首页</a>&nbsp;&gt;&nbsp;业绩展示</span>
+        </div>
+        <div class="right-mainbody">
+            <div class="about">
+                <img th:each="image,status:${session.images}" th:src="'images/score/'+${image.getImgKind()==2?image.getImgName():''}" th:style="${image.getImgKind()==2?'width:800px;height:1000px':'display:none'}">
+            </div>
+        </div>
+    </div>
+</div>
+<footer>
+    <div class="main clearfix">
+        <div th:replace="header :: footerAddress"></div>
+        <div th:replace="header :: footerTitle"></div>
+        <div class="ewm" th:each="image,status:${session.images}" th:style="${image.getImgKind()==4?'':'display:none'}">
+            <img th:src="'images/ewm/'+${image.getImgKind()==4?image.getImgName():''}"><br>扫一扫访问
+        </div>
+    </div>
+    <div class="link">
+        <div class="main clearfix">
+            <ul>Copyright © 2020 [[${session.company.getCyName}]] All Rights Reserved 版权所有</ul>
+            <span><a href="http://beian.miit.gov.cn/" target="_blank"/><font color="#FFF"/>鲁ICP备20000482号-1 </font></a> </span>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

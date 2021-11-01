@@ -1,0 +1,32 @@
+.details .details-img{
+    float: left;
+    border: 2px solid black;
+}
+.details .details-text{
+    width: 400px;
+    float: left;
+    margin-left: 50px;
+}
+.details .details-text span{
+    font-size: 18px;
+}
+.details-context{
+    float: left;
+    width: 1000px;
+}
+.details-context .details-context-title{
+    width: 100%;
+    background-color: #d4d4d4;
+    color: white;
+    text-align: center;
+}
+.details-context .details-context-title h2{
+    background-color: #1B72C7;
+    width: 15%;
+    font-size: 18px;
+    height: 30px;
+    line-height: 30px;
+}
+.details-context .details-company p{
+    font-size: 15px;
+}
